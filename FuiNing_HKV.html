@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>恢靈 & 妃妮 - 個人頁面</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Noto+Sans+TC:wght@300;500;700&family=Playfair+Display:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-primary: rgba(126, 100, 62, 0.26);
+      --bg-secondary: #8f6e597e;
+      --fg: #ffffff; 
+      --fg-muted: #ffffffd3;
+      --accent: #ffffff91;
+      --accent-dim: rgba(206, 27, 87, 0.815);
+      --card-bg: rgba(129, 104, 80, 0.171);
+      --border: #ffffff; /* 修正：補足 6 位碼 */
+      --player-bg: rgba(136, 92, 35, 0.404);
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      padding-bottom: 120px;
+      font-family: 'Fira Code', 'Noto Sans TC', monospace;
+      /* 修正：將背景圖從 :root 移至 body */
+      background: url('600_15X10_350pdi2.png') no-repeat center/cover fixed;
+      background-color: #111; 
+      color: var(--fg);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* 背景遮罩，防止背景圖太亮干擾文字 */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      z-index: 0;
+    }
+
+    /* 畫布背景層（數位雨） */
+    #canvas-matrix {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.25; 
+    }
+
+    /* 科技感網格覆蓋層 */
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 4px, 6px 100%;
+    }
+
+    /* 卡片 */
+    .card {
+      position: relative;
+      z-index: 3;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px; 
+      padding: 2.5rem 2rem;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(18, 197, 158, 0.2), inset 0 0 15px rgba(18, 197, 158, 0.1);
+      animation: card-entrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateY(20px);
+      margin-bottom: 20px;
+    }
+
+    @keyframes card-entrance { to { opacity: 1; transform: translateY(0); } }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px dashed var(--accent);
+      animation: ring-rotate 15s linear infinite;
+    }
+
+    @keyframes ring-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    .avatar {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #000;
+      filter: grayscale(20%) sepia(10%) hue-rotate(85deg); 
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+    .avatar:hover { 
+      transform: scale(1.05); 
+      filter: grayscale(0%);
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    /* 文字 */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+      animation: text-fade-in 0.6s 0.2s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes text-fade-in {
+      to { opacity: 1; }
+    }
+
+    .bio {
+      color: var(--fg-muted);
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 0.4rem;
+      text-align: left;
+    }
+
+    .audio-section-title {
+      font-family: 'Share Tech Mono', sans-serif;
+      font-size: 1rem;
+      color: var(--fg);
+      margin: 1.5rem 0 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      border-left: 4px solid var(--accent);
+      padding-left: 8px;
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 5px var(--accent-dim);
+    }
+
+    .audio-tracks {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .track-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(18, 197, 158, 0.05);
+      border: 1px solid rgba(18, 197, 158, 0.2);
+      padding: 0.7rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+    .track-item:hover {
+      background: rgba(18, 197, 158, 0.15);
+      border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(18, 197, 158, 0.2);
+    }
+    .track-item.playing {
+      background: rgba(18, 197, 158, 0.25);
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(18, 197, 158, 0.3);
+    }
+    .track-name {
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 210px;
+    }
+    .track-play-icon {
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      padding: 0.8rem 1.25rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--fg);
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(18, 197, 158, 0.3);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(-10px);
+      animation: btn-entrance 0.4s ease-out forwards;
+    }
+
+    .btn:nth-child(1) { animation-delay: 0.05s; }
+    .btn:nth-child(2) { animation-delay: 0.10s; }
+    .btn:nth-child(3) { animation-delay: 0.15s; }
+    .btn:nth-child(4) { animation-delay: 0.20s; }
+    .btn:nth-child(5) { animation-delay: 0.25s; }
+    .btn:nth-child(6) { animation-delay: 0.30s; }
+    .btn:nth-child(7) { animation-delay: 0.35s; }
+    .btn:nth-child(8) { animation-delay: 0.40s; }
+
+    @keyframes btn-entrance { to { opacity: 1; transform: translateX(0); } }
+
+    .btn:hover {
+      background: rgba(18, 197, 158, 0.2);
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(18, 197, 158, 0.4);
+      transform: scale(1.02);
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn i { font-size: 1.1rem; width: 20px; text-align: center; }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 11px;
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--fg-muted);
+      opacity: 0.6;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== 音樂播放列 ===== */
+    .audio-player-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--player-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-top: 2px solid var(--accent);
+      padding: 15px 25px;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 -5px 25px rgba(18, 197, 158, 0.15);
+      z-index: 1000;
+      display: none;
+    }
+
+    .player-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 30%;
+    }
+
+    .player-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      border: 1px solid var(--accent);
+      object-fit: cover;
+    }
+
+    .player-meta {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    .player-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-artist {
+      font-size: 0.75rem;
+      color: #aaa;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .player-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 45%;
+    }
+
+    .ctrl-btn {
+      background: var(--accent);
+      border: none;
+      color: #000;
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .ctrl-btn:hover { 
+      transform: scale(1.05); 
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .progress-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+      font-size: 0.75rem;
+      font-family: 'Share Tech Mono', monospace;
+      color: #aaa;
+    }
+
+    .progress-bar {
+      flex-grow: 1;
+      height: 4px;
+      background: rgba(18, 197, 158, 0.15);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-current {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .player-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      width: 25%;
+      font-size: 0.8rem;
+    }
+
+    .volume-slider {
+      width: 80px;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    @media (max-width: 500px) {
+      .card { padding: 2rem 1.25rem; }
+      .player-left { width: 60%; }
+      .player-center { width: 40%; }
+      .player-right { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      #canvas-matrix { display: none; }
+    }
+
+    .avatar-wrapper {
+        width: 100px;
+        height: 100px;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      .bio {
+        font-size: 0.875rem;
+      }
+  </style>
+</head>
+<body>
+
+  <canvas id="canvas-matrix"></canvas>
+  <div class="grid-overlay"></div>
+
+  <div class="card">
+    <div class="avatar-wrapper">
+      <div class="avatar-ring"></div>
+      <img src="https://yt3.googleusercontent.com/2mfAnxjwVxgCXPUQQLr6QORtLC9Ss0jWEw-u03KHjbK17jYhVxNANNJwLyNIT2i6UmJNmVkVsMk=s160-c-k-c0x00ffffff-no-rj" class="avatar" alt="School Avatar" />
+    </div>
+
+    <h1>恢靈 & 妃妮</h1>
+    <p class="bio">• 每星期六晚21:00固定繪畫台|
+                   成為了古代妖精一族國王之後,為了振興國家成為VTuber</p>
+    
+                   <p class="bio">• | ♂️ / ♀️(バ美肉)｜🎨繪＆建模:自己｜
+                   粵語⭕/普通話🤏/英文❌/日文❌</p>
+
+    <div class="audio-section-title"><i class="fas fa-terminal"></i> CORE_AUDIO_LOG</div>
+    <div class="audio-tracks">
+      <div class="track-item" data-src="夜闌人靜.mp3" data-title="夜闌人靜">
+        <span class="track-name">夜闌人靜</span>
+        <span class="track-play-icon"><i class="fas fa-play"></i></span>
+      </div>
+    </div>
+
+    <div class="social-links">
+      <p class="bio"></p>
+      
+      <a href="https://www.facebook.com/gaming/FuiNingHKV" target="_blank" rel="noopener noreferrer" class="btn">
+        <i class="fab fa-facebook"></i> FB //FuiNingHKV
+      </a>
+
+      <a href="https://www.instagram.com/fuining_hkv" target="_blank" rel="noopener noreferrer" class="btn instagram">
+        <i class="fab fa-instagram"></i> IG //fuining_hkv
+      </a>
+
+      <a href="http://www.youtube.com/@FuiNing_HKV" target="_blank" rel="noopener noreferrer" class="btn instagram">
+        <i class="fab fa-youtube"></i> YT //恢靈 & 妃妮【HK Vtuber】
+      </a>
+      
+      <a href="https://discord.gg/qu57m6yqNB" target="_blank" rel="noopener noreferrer" class="btn discord">
+        <i class="fab fa-discord"></i> DC //FuiNing#8918
+      </a>
+
+      <a href="https://twitch.tv/fuining" target="_blank" rel="noopener noreferrer" class="btn twitch">
+        <i class="fab fa-twitch"></i> Twitch //fuining
+      </a>
+
+      <a href="https://twitter.com/FuiNing_HKV?t=61rcOFivDBQrZOOtVuTxUg&s=09" target="_blank" rel="noopener noreferrer" class="btn twitter">
+        <i class="fab fa-twitter"></i> twitter //FuiNing_HKV
+      </a>
+
+      <a href="https://threads.net/@fuining_hkv" target="_blank" rel="noopener noreferrer" class="btn threads">
+        <i class="fab fa-threads"></i> threads //FuiNing_HKV
+      </a>
+    </div>
+
+    <div class="footer">
+      SYS.STATUS: ONLINE // © 2026 Hoi-Yin art
+    </div>
+  </div>
+
+  <audio id="main-audio" preload="metadata"></audio>
+
+  <div class="audio-player-bar" id="player-bar">
+    <div class="player-left">
+      <img src="夜闌人靜.jpg" alt="Mini Avatar" class="player-avatar">
+      <div class="player-meta">
+        <span class="player-title" id="bar-title">Null track</span>
+        <span class="player-artist">moon tang</span>
+      </div>
+    </div>
+
+    <div class="player-center">
+      <button class="ctrl-btn" id="bar-play-toggle"><i class="fas fa-play"></i></button>
+      <div class="progress-container">
+        <span id="time-current">00:00</span>
+        <div class="progress-bar" id="bar-progress-bg">
+          <div class="progress-current" id="bar-progress-fill"></div>
+        </div>
+        <span id="time-total">00:00</span>
+      </div>
+    </div>
+
+    <div class="player-right">
+      <i class="fas fa-volume-up" style="color:var(--accent);"></i>
+      <input type="range" class="volume-slider" id="volume-range" min="0" max="1" step="0.05" value="0.8">
+    </div>
+  </div>
+
+  <script>
+    // 數位雨 JavaScript 核心邏輯保持不變且運作正常
+    const canvas = document.getElementById('canvas-matrix');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const katakana = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ';
+    const alphabet = katakana.split('');
+    const fontSize = 16;
+    let columns = canvas.width / fontSize;
+    let rainDrops = [];
+
+    function initRain() {
+      columns = canvas.width / fontSize;
+      rainDrops = [];
+      for (let x = 0; x < columns; x++) {
+        rainDrops[x] = 1;
+      }
+    }
+    initRain();
+    window.addEventListener('resize', initRain);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#'; 
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < rainDrops.length; i++) {
+        const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          rainDrops[i] = 0;
+        }
+        rainDrops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 30);
+
+    // 音訊控制
+    const audio = document.getElementById('main-audio');
+    const playerBar = document.getElementById('player-bar');
+    const trackItems = document.querySelectorAll('.track-item');
+    const barTitle = document.getElementById('bar-title');
+    const barPlayToggle = document.getElementById('bar-play-toggle');
+    const progressBg = document.getElementById('bar-progress-bg');
+    const progressFill = document.getElementById('bar-progress-fill');
+    const timeCurrent = document.getElementById('time-current');
+    const timeTotal = document.getElementById('time-total');
+    const volumeRange = document.getElementById('volume-range');
+
+    let currentTrackItem = null;
+
+    trackItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const src = item.getAttribute('data-src');
+        const title = item.getAttribute('data-title');
+
+        if (currentTrackItem === item) {
+          togglePlay();
+          return;
+        }
+
+        if (currentTrackItem) {
+          currentTrackItem.classList.remove('playing');
+          currentTrackItem.querySelector('.track-play-icon i').className = 'fas fa-play';
+        }
+
+        currentTrackItem = item;
+        item.classList.add('playing');
+        item.querySelector('.track-play-icon i').className = 'fas fa-pause';
+
+        audio.src = src;
+        barTitle.innerText = title;
+
+        playerBar.style.display = 'flex';
+        audio.play().catch(err => console.log("播放被阻擋:", err));
+        barPlayToggle.innerHTML = '<i class="fas fa-pause"></i>';
+      });
+    });
+
+    barPlayToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePlay();
+    });
+
+    function togglePlay() {
+      if (!currentTrackItem) return;
+      if (audio.paused) {
+        audio.play();
+        barPlayToggle.innerHTML = '<i class="fas fa-pause"></i>';
+        currentTrackItem.querySelector('.track-play-icon i').className = 'fas fa-pause';
+      } else {
+        audio.pause();
+        barPlayToggle.innerHTML = '<i class="fas fa-play"></i>';
+        currentTrackItem.querySelector('.track-play-icon i').className = 'fas fa-play';
+      }
+    }
+
+    audio.addEventListener('loadedmetadata', () => {
+      timeTotal.innerText = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        const percentage = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = percentage + '%';
+        timeCurrent.innerText = formatTime(audio.currentTime);
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      barPlayToggle.innerHTML = '<i class="fas fa-play"></i>';
+      if (currentTrackItem) {
+        currentTrackItem.querySelector('.track-play-icon i').className = 'fas fa-play';
+      }
+      progressFill.style.width = '0%';
+      timeCurrent.innerText = '00:00';
+    });
+
+    progressBg.addEventListener('click', (e) => {
+      if (!audio.src) return;
+      const rect = progressBg.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      audio.currentTime = (clickX / rect.width) * audio.duration;
+    });
+
+    volumeRange.addEventListener('input', (e) => {
+      audio.volume = e.target.value;
+    });
+
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return "00:00";
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    }
+  </script>
+</body>
+</html>
