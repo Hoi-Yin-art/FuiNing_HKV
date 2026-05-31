@@ -180,8 +180,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(18, 197, 158, 0.05);
-      border: 1px solid rgba(18, 197, 158, 0.2);
+      background: rgba(19, 184, 148, 0.288);
+      border: 1px solid rgba(226, 226, 226, 0.582);
       padding: 0.7rem 1rem;
       border-radius: 4px;
       cursor: pointer;
@@ -189,14 +189,14 @@
       text-align: left;
     }
     .track-item:hover {
-      background: rgba(18, 197, 158, 0.15);
+      background: rgba(12, 163, 130, 0.233);
       border-color: var(--accent);
-      box-shadow: 0 0 8px rgba(18, 197, 158, 0.2);
+      box-shadow: 0 0 8px rgba(11, 165, 132, 0.2);
     }
     .track-item.playing {
-      background: rgba(18, 197, 158, 0.25);
+      background: rgba(49, 202, 169, 0.377);
       border-color: var(--accent);
-      box-shadow: 0 0 12px rgba(18, 197, 158, 0.3);
+      box-shadow: 0 0 12px rgba(10, 187, 172, 0.61);
     }
     .track-name {
       font-size: 0.85rem;
@@ -227,8 +227,8 @@
       font-size: 0.85rem;
       font-weight: 600;
       color: var(--fg);
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(18, 197, 158, 0.3);
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.712);
       transition: all 0.25s ease;
       position: relative;
       overflow: hidden;
@@ -249,9 +249,9 @@
     @keyframes btn-entrance { to { opacity: 1; transform: translateX(0); } }
 
     .btn:hover {
-      background: rgba(18, 197, 158, 0.2);
+      background: rgba(11, 170, 190, 0.336);
       border-color: var(--accent);
-      box-shadow: 0 0 15px rgba(18, 197, 158, 0.4);
+      box-shadow: 0 0 15px #0da5d45d;
       transform: scale(1.02);
     }
     .btn:active { transform: scale(0.98); }
@@ -279,7 +279,7 @@
       padding: 15px 25px;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 -5px 25px rgba(18, 197, 158, 0.15);
+      box-shadow: 0 -5px 25px rgba(56, 32, 5, 0.849);
       z-index: 1000;
       display: none;
     }
@@ -309,7 +309,7 @@
     .player-title {
       font-size: 0.85rem;
       font-weight: 600;
-      color: #fff;
+      color: #ffffff;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -317,7 +317,7 @@
 
     .player-artist {
       font-size: 0.75rem;
-      color: #aaa;
+      color: #c7c7c7;
       font-family: 'Share Tech Mono', monospace;
     }
 
@@ -361,7 +361,7 @@
     .progress-bar {
       flex-grow: 1;
       height: 4px;
-      background: rgba(18, 197, 158, 0.15);
+      background: rgba(18, 197, 158, 0.432);
       border-radius: 2px;
       cursor: pointer;
       position: relative;
@@ -440,8 +440,8 @@
 
     <div class="audio-section-title"><i class="fas fa-terminal"></i> CORE_AUDIO_LOG</div>
     <div class="audio-tracks">
-      <div class="track-item" data-src="M500002a5s8Q1MgvP7.mp3" data-title="夜闌人靜">
-        <span class="track-name">夜闌人靜</span>
+      <div class="track-item" data-src="M500002cAn6H2xHon3.mp3" data-title="夜闌人靜1996年">
+        <span class="track-name">甘心取代你1996年</span>
         <span class="track-play-icon"><i class="fas fa-play"></i></span>
       </div>
     </div>
@@ -457,6 +457,8 @@
         <i class="fab fa-instagram"></i> IG //fuining_hkv
       </a>
 
+      <>------=============------<>
+
       <a href="http://www.youtube.com/@FuiNing_HKV" target="_blank" rel="noopener noreferrer" class="btn instagram">
         <i class="fab fa-youtube"></i> YT //恢靈 & 妃妮【HK Vtuber】
       </a>
@@ -464,6 +466,8 @@
       <a href="https://discord.gg/qu57m6yqNB" target="_blank" rel="noopener noreferrer" class="btn discord">
         <i class="fab fa-discord"></i> DC //FuiNing#8918
       </a>
+
+      <>------=============------<>
 
       <a href="https://twitch.tv/fuining" target="_blank" rel="noopener noreferrer" class="btn twitch">
         <i class="fab fa-twitch"></i> Twitch //fuining
@@ -487,10 +491,10 @@
 
   <div class="audio-player-bar" id="player-bar">
     <div class="player-left">
-      <img src="夜闌人靜.jpg" alt="Mini Avatar" class="player-avatar">
+      <img src="鄭伊健.jpg" alt="Mini Avatar" class="player-avatar">
       <div class="player-meta">
         <span class="player-title" id="bar-title">Null track</span>
-        <span class="player-artist">moon tang</span>
+        <span class="player-artist">鄭伊健(Ekin Cheng)</span>
       </div>
     </div>
 
@@ -510,7 +514,6 @@
       <input type="range" class="volume-slider" id="volume-range" min="0" max="1" step="0.05" value="0.8">
     </div>
   </div>
-
   <script>
     // 數位雨 JavaScript 核心邏輯保持不變且運作正常
     const canvas = document.getElementById('canvas-matrix');
