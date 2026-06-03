@@ -16,15 +16,15 @@
     }
 
     :root {
-      --bg-primary: rgba(126, 100, 62, 0.26);
-      --bg-secondary: #8f6e597e;
+      --bg-primary: rgba(0, 0, 0, 0.205);
+      --bg-secondary: ;
       --fg: #ffffff; 
-      --fg-muted: #ffffffd3;
-      --accent: #ffffff91;
-      --accent-dim: rgba(206, 27, 87, 0.815);
-      --card-bg: rgba(129, 104, 80, 0.171);
+      --fg-muted: #ffffffee;
+      --accent: #eeeeeeee;
+      --accent-dim: rgba(172, 43, 86, 0.815);
+      --card-bg: rgba(175, 62, 96, 0.199);
       --border: #ffffff; /* 修正：補足 6 位碼 */
-      --player-bg: rgba(136, 92, 35, 0.404);
+      --player-bg: rgba(185, 127, 40, 0.404);
     }
 
     html {
@@ -66,16 +66,6 @@
       opacity: 0.25; 
     }
 
-    /* 科技感網格覆蓋層 */
-    .grid-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-      background-size: 100% 4px, 6px 100%;
-    }
-
     /* 卡片 */
     .card {
       position: relative;
@@ -83,13 +73,13 @@
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(179, 179, 179, 0.212);
       border-radius: 12px; 
       padding: 2.5rem 2rem;
       max-width: 360px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 0 30px rgba(18, 197, 158, 0.2), inset 0 0 15px rgba(18, 197, 158, 0.1);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.356), inset 0 0 15px rgba(15, 226, 233, 0.548);
       animation: card-entrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       opacity: 0;
       transform: translateY(20px);
@@ -242,8 +232,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(19, 184, 148, 0.288);
-      border: 1px solid rgba(226, 226, 226, 0.582);
+      background: rgba(112, 112, 112, 0.26);
+      border: 1px solid rgba(180, 180, 180, 0.582);
       padding: 0.7rem 1rem;
       border-radius: 4px;
       cursor: pointer;
@@ -251,7 +241,7 @@
       text-align: left;
     }
     .track-item:hover {
-      background: rgba(12, 163, 130, 0.233);
+      background: rgba(9, 121, 96, 0.288);
       border-color: var(--accent);
       box-shadow: 0 0 8px rgba(11, 165, 132, 0.2);
     }
@@ -312,9 +302,9 @@
     @keyframes btn-entrance { to { opacity: 1; transform: translateX(0); } }
 
     .btn:hover {
-      background: rgba(11, 170, 190, 0.336);
+      background: rgba(212, 27, 141, 0.5);
       border-color: var(--accent);
-      box-shadow: 0 0 15px #0da5d45d;
+      box-shadow: 0 0 15px #8d08775d;
       transform: scale(1.02);
     }
     .btn:active { transform: scale(0.98); }
@@ -424,7 +414,7 @@
     .progress-bar {
       flex-grow: 1;
       height: 4px;
-      background: rgba(18, 197, 158, 0.432);
+      background: rgba(0, 0, 0, 0.432);
       border-radius: 2px;
       cursor: pointer;
       position: relative;
@@ -495,11 +485,13 @@
     </div>
 
     <h1>恢靈 & 妃妮</h1>
-    <p class="bio">• 每星期六晚21:00固定繪畫台|
-                     成為了古代妖精一族國王之後,為了振興國家成為VTuber</p>
+    <p class="bio">•每星期六晚21:00固定繪畫台|
+                    成為了古代妖精一族國王之後,為了振興國家成為VTuber
+                    </p>
     
-   <p class="bio">• ♂️/♀️(バ美肉)|🎨繪＆建模:自己|
-                    粵語⭕/普通話🤏/英文❌/日文❌</p>
+    <p class="bio">>♂️/♀️(バ美肉)｜🎨繪＆建模:自己|
+                    粵語⭕/普通話🤏/英文❌/日文❌
+                    </p>               
   
     <div class="audio-section-title"><i class="fas fa-terminal"></i> CORE_AUDIO_LOG</div>
     <div class="audio-tracks">
@@ -511,41 +503,41 @@
     
     <div class="social-links">
       <p class="bio"></p> 
-     <>----====|社交媒體|====----<>
-      <a href="https://www.facebook.com/gaming/FuiNingHKV" target="_blank" rel="noopener noreferrer" class="btn">
-        <i class="fab fa-facebook"></i> FB //FuiNingHKV
+    <>>-<»>==<社交媒體>==<«>-<<>
+      <a href="https://discord.gg/qu57m6yqNB" target="_blank" rel="noopener noreferrer" class="btn discord">
+        <i class="fab fa-discord"></i> DC | FuiNing#8918
       </a>
 
-      <a href="https://www.instagram.com/fuining_hkv" target="_blank" rel="noopener noreferrer" class="btn instagram">
-        <i class="fab fa-instagram"></i> IG //fuining_hkv
-      </a>
-
-      <>----====|直播平台|====----<>
+    <>>-<»>==<直播平台>==<«>-<<>
       <a href="http://www.youtube.com/@FuiNing_HKV" target="_blank" rel="noopener noreferrer" class="btn instagram">
-        <i class="fab fa-youtube"></i> YT //恢靈 & 妃妮【HK Vtuber】
+        <i class="fab fa-youtube"></i> YT | 恢靈 & 妃妮【HK Vtuber】
       </a>
       
       <a href="https://twitch.tv/fuining" target="_blank" rel="noopener noreferrer" class="btn twitch">
-        <i class="fab fa-twitch"></i> Twitch //fuining
+        <i class="fab fa-twitch"></i> Twitch |FuiNing
       </a>
 
-      <>----====|社群連結|====----<>
-      <a href="https://discord.gg/qu57m6yqNB" target="_blank" rel="noopener noreferrer" class="btn discord">
-        <i class="fab fa-discord"></i> DC //FuiNing#8918
+    <>>-<»>==<社群連結>==<«>-<<>
+      <a href="https://www.facebook.com/gaming/FuiNingHKV" target="_blank" rel="noopener noreferrer" class="btn">
+        <i class="fab fa-facebook"></i> FB | FuiNingHKV
+      </a>
+
+      <a href="https://www.instagram.com/fuining_hkv" target="_blank" rel="noopener noreferrer" class="btn instagram">
+        <i class="fab fa-instagram"></i> IG | fuining_hkv
       </a>
 
       <a href="https://bsky.app/profile/fuininghkv.bsky.social" target="_blank" rel="noopener noreferrer" class="btn threads">
         <svg width="20" height="24" fill="currentColor" viewBox="0 0 24 24" transform="" id="injected-svg" xmlns="http://www.w3.org/2000/svg"><path d="M6.34 4.38C8.63 6.1 11.1 9.59 12 11.46c.91-1.87 3.37-5.36 5.66-7.08 1.65-1.24 4.34-2.2 4.34.86 0 .61-.35 5.13-.56 5.86-.71 2.55-3.32 3.2-5.63 2.81 4.04.69 5.07 2.97 2.85 5.25-4.22 4.33-6.07-1.09-6.54-2.47-.09-.25-.13-.37-.13-.27 0-.1-.04.02-.13.27-.47 1.39-2.32 6.81-6.54 2.47-2.22-2.28-1.19-4.56 2.85-5.25-2.31.39-4.92-.26-5.63-2.81-.21-.73-.56-5.25-.56-5.86 0-3.06 2.68-2.1 4.34-.85Z"></path></svg>
-         bluesky //FuiNing_HKV
+         bluesky | fuininghkv.bsky.social
       </a>
 
       <a href="https://twitter.com/FuiNing_HKV?t=61rcOFivDBQrZOOtVuTxUg&s=09" target="_blank" rel="noopener noreferrer" class="btn twitter">
-        <i class="fab fa-twitter"></i> twitter //FuiNing_HKV
+        <i class="fab fa-twitter"></i> twitter | FuiNing_HKV
       </a>
 
       <a href="https://threads.net/@fuining_hkv" target="_blank" rel="noopener noreferrer" class="btn threads">
-        <i class="fab fa-threads"></i> threads //FuiNing_HKV
-      </a>
+        <i class="fab fa-threads"></i> threads | fuining_hkv
+      </a> 
     </div>
 
     <div class="footer">
