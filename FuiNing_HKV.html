@@ -471,6 +471,51 @@
       .bio {
         font-size: 0.875rem;
       }
+
+/* 容器整體設計 */
+.bio-container {
+    background-color: #0e0e0e25; /* 輕微的淡藍色背景，營造校園和諧感 */
+    border-left: 5px solid #dadada; /* 左側藍色邊框，增加視覺重心 */
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px 8px 8px 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 標題樣式 */
+.bio-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #c7c7c7;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* 列表樣式 */
+.bio-list {
+    list-style-type: none; /* 移除預設的黑點 */
+    padding-left: 5px;
+    margin: 0;
+}
+
+/* 列表項目樣式 */
+.bio-list li {
+    font-size: 0.95rem;
+    color: #ffffffd8;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
+}
+
+/* 用可愛的小箭頭取代傳統黑點 */
+.bio-list li::before {
+    content: "✨"; /* 第一個容器可以用閃亮貼圖，或者統一用如下的箭頭 */
+    /* content: "•"; 如果想要簡約點 */
+    position: absolute;
+    left: 0;
+    top: 0;
+}
   </style>
 </head>
 <body>
@@ -485,14 +530,23 @@
     </div>
 
     <h1>恢靈 & 妃妮</h1>
-    <p class="bio">•每星期六晚21:00固定繪畫台|
-                    成為了古代妖精一族國王之後,為了振興國家成為VTuber
-                    </p>
     
-    <p class="bio">•♂️/♀️(バ美肉)｜🎨繪＆建模:自己|
-                    粵語⭕/普通話🤏/英文❌/日文❌
-                    </p>               
-  
+      <div class="bio-container">
+    <p class="bio-title"></p>
+    <ul class="bio-list">
+        <li>每星期六晚21:00固定繪畫台|
+            成為了古代妖精一族國王之後,為了振興國家成為VTuber</li>
+    </ul>
+</div>
+    
+      <div class="bio-container">
+    <p class="bio-title"></p>
+    <ul class="bio-list">
+        <li>♂️/♀️(バ美肉)｜🎨繪＆建模:自己|</li>
+        <li>粵語⭕/普通話🤏/英文❌/日文❌</li>
+    </ul>
+</div>               
+
     <div class="audio-section-title"><i class="fas fa-terminal"></i> CORE_AUDIO_LOG</div>
     <div class="audio-tracks">
       <div class="track-item" data-src="M500002cAn6H2xHon3.mp3" data-title="1996年-甘心取代你">
@@ -500,7 +554,7 @@
         <span class="track-play-icon"><i class="fas fa-play"></i></span>
       </div>
     </div>
-    
+
     <div class="social-links">
       <p class="bio"></p> 
     <>>-<»>==<社群連結>==<«>-<<>
@@ -512,7 +566,7 @@
       <a href="http://www.youtube.com/@FuiNing_HKV" target="_blank" rel="noopener noreferrer" class="btn instagram">
         <i class="fab fa-youtube"></i> YT | 恢靈 & 妃妮【HK Vtuber】
       </a>
-      
+
       <a href="https://twitch.tv/fuining" target="_blank" rel="noopener noreferrer" class="btn twitch">
         <i class="fab fa-twitch"></i> Twitch | FuiNing
       </a>
@@ -535,7 +589,7 @@
         <i class="fab fa-twitter"></i> twitter | FuiNing_HKV
       </a>
 
-      <a href="https://threads.net/@fuining_hkv" target="_blank" rel="noopener noreferrer" class="btn threads">
+      <a href="https://threads.net/@fuining_hkv" target="_b5lank" rel="noopener noreferrer" class="btn threads">
         <i class="fab fa-threads"></i> threads | fuining_hkv
       </a> 
     </div>
