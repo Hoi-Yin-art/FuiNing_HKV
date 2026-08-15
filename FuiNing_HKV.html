@@ -73,7 +73,7 @@
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(179, 179, 179, 0.212);
+      border: 1px solid rgba(179, 179, 179, 0.267);
       border-radius: 12px; 
       padding: 2.5rem 2rem;
       max-width: 360px;
@@ -111,7 +111,7 @@
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #000;
+      border: 2px solid #000000;
       filter: grayscale(20%) sepia(10%) hue-rotate(85deg); 
       transition: all 0.3s ease;
       z-index: 1;
@@ -474,12 +474,12 @@
 
 /* 容器整體設計 */
 .bio-container {
-    background-color: #0e0e0e25; /* 輕微的淡藍色背景，營造校園和諧感 */
-    border-left: 5px solid #dadada; /* 左側藍色邊框，增加視覺重心 */
-    padding: 15px 20px;
+    background-color: #3030302a; /* 輕微的淡藍色背景，營造校園和諧感 */
+    border-left: 3px solid #dadada; /* 左側藍色邊框，增加視覺重心 */
+    padding: 5px 10px;
     margin-bottom: 20px;
     border-radius: 4px 8px 8px 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.445);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -516,6 +516,19 @@
     left: 0;
     top: 0;
 }
+
+.image-container {
+  width: 100%;
+  max-width: 500px; /* Adjust max width as needed */
+  margin: 0 auto;
+}
+
+.image-container img {
+  width: 100%;
+  border-radius: 10px 10px 10px 10px;
+  height: auto;
+  display: block;
+}
   </style>
 </head>
 <body>
@@ -529,7 +542,7 @@
       <img src="4502d964-f5b1-47cf-b312-40072587f9e2.gif" class="avatar" alt="Avatar" />
     </div>
 
-    <h1>恢靈 & 妃妮</h1>
+    <h1>恢靈 & 妃妮</h1> 
     
       <div class="bio-container">
     <p class="bio-title"></p>
@@ -545,7 +558,16 @@
         <li>♂️/♀️(バ美肉)｜🎨繪＆建模:自己|</li>
         <li>粵語⭕/普通話🤏/英文❌/日文❌</li>
     </ul>
-</div>               
+</div> 
+
+       <div class="image-container">
+    <p class="bio-title"></p>
+        <img src="L.png" alt="Description of image">
+         ----
+        <img src="2.0.png"/>
+         ----
+        <img src="HFIadbGawAAqs7i.jpg" alt="Description of image">
+</div>
 
     <div class="audio-section-title"><i class="fas fa-terminal"></i> CORE_AUDIO_LOG</div>
     <div class="audio-tracks">
