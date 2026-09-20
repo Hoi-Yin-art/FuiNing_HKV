@@ -18,13 +18,13 @@
     :root {
       --bg-primary: rgba(0, 0, 0, 0.205);
       --bg-secondary: ;
-      --fg: #ffffff; 
-      --fg-muted: #ffffffee;
-      --accent: #eeeeeeee;
-      --accent-dim: rgba(172, 43, 86, 0.815);
-      --card-bg: rgba(175, 62, 96, 0.199);
-      --border: #ffffff; /* 修正：補足 6 位碼 */
-      --player-bg: rgba(185, 127, 40, 0.404);
+      --fg: #fffffff1; 
+      --fg-muted: #ffffffde;
+      --accent: #eeeeeec2;
+      --accent-dim: rgba(180, 112, 85, 0.452);
+      --card-bg: rgba(139, 111, 85, 0.199);
+      --border: #ffffffce; /* 修正：補足 6 位碼 */
+      --player-bg: rgba(165, 114, 56, 0.473);
     }
 
     html {
@@ -215,7 +215,7 @@
       margin: 1.5rem 0 0.75rem;
       text-align: left;
       font-weight: 600;
-      border-left: 4px solid var(--accent);
+      border-left: 0px solid var(--accent);
       padding-left: 8px;
       letter-spacing: 0.1em;
       text-shadow: 0 0 5px var(--accent-dim);
@@ -280,7 +280,7 @@
       font-weight: 600;
       color: var(--fg);
       background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.712);
+      border: 1px solid rgba(255, 255, 255, 0.767);
       transition: all 0.25s ease;
       position: relative;
       overflow: hidden;
@@ -302,9 +302,9 @@
     @keyframes btn-entrance { to { opacity: 1; transform: translateX(0); } }
 
     .btn:hover {
-      background: rgba(212, 27, 141, 0.5);
+      background: rgba(238, 238, 238, 0.651);
       border-color: var(--accent);
-      box-shadow: 0 0 15px #8d08775d;
+      box-shadow: 0 0 15px #e4e4e45d;
       transform: scale(1.02);
     }
     .btn:active { transform: scale(0.98); }
@@ -325,6 +325,7 @@
       bottom: 0;
       left: 0;
       right: 0;
+      border-radius: 25px 25px 0px 0px;
       background: var(--player-bg);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -332,7 +333,7 @@
       padding: 15px 25px;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 -5px 25px rgba(56, 32, 5, 0.849);
+      box-shadow: 0 -5px 25px rgba(224, 224, 224, 0.699);
       z-index: 1000;
       display: none;
     }
@@ -385,7 +386,7 @@
     .ctrl-btn {
       background: var(--accent);
       border: none;
-      color: #000;
+      color: #000000f1;
       width: 36px;
       height: 36px;
       border-radius: 4px;
@@ -396,6 +397,7 @@
       font-size: 0.85rem;
       transition: all 0.2s;
     }
+    
     .ctrl-btn:hover { 
       transform: scale(1.05); 
       box-shadow: 0 0 10px var(--accent);
@@ -408,7 +410,7 @@
       gap: 10px;
       font-size: 0.75rem;
       font-family: 'Share Tech Mono', monospace;
-      color: #aaa;
+      color: #aaaaaafa;
     }
 
     .progress-bar {
@@ -613,7 +615,8 @@
 
       <a href="https://threads.net/@fuining_hkv" target="_b5lank" rel="noopener noreferrer" class="btn threads">
         <i class="fab fa-threads"></i> threads | fuining_hkv
-      </a> 
+      </a>
+
     </div>
 
     <div class="footer">
